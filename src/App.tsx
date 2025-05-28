@@ -18,6 +18,8 @@ import LoanInitialConditionPage from './features/teacher/components/LoanInitialC
 import AdminDashboard from './features/admin/pages/AdminDashboard';
 import PenaltySettingsPage from './features/admin/pages/PenaltySettingsPage';
 import ActivePenaltiesPage from './features/admin/pages/ActivePenaltiesPage';
+import MonthlyReportsPage from './features/admin/pages/MonthlyReportsPage';
+import TwoFactorSettingsPage from './features/admin/pages/TwoFactorSettingsPage';
 import './App.css';
 
 function App() {
@@ -78,6 +80,9 @@ function App() {
       }>
         <Route index element={<AdminDashboard />} />
         <Route path="users" element={<UsersPage />} />
+        <Route path="equipment" element={<EquipmentPage />} />
+        <Route path="2fa-settings" element={<TwoFactorSettingsPage />} />
+        <Route path="monthly-reports" element={<MonthlyReportsPage />} />
         <Route path="penalties" element={<PenaltySettingsPage />} />
         <Route path="active-penalties" element={<ActivePenaltiesPage />} />
         <Route path="loan-history" element={<LoanHistoryPage />} />

@@ -1,10 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import {
   UsersIcon,
-  ClockIcon,
   ShieldExclamationIcon,
   Cog6ToothIcon,
-  ArchiveBoxIcon
+  ArchiveBoxIcon,
+  ChartBarIcon,
+  WrenchScrewdriverIcon
 } from '@heroicons/react/24/outline';
 
 // Definición de las opciones de navegación
@@ -14,6 +15,24 @@ const navigationItems = [
     description: 'Gestión de usuarios del sistema',
     path: '/admin/users',
     icon: UsersIcon
+  },
+  {
+    name: 'Gestión de Equipos',
+    description: 'Administrar inventario y equipos de laboratorio',
+    path: '/admin/equipment',
+    icon: WrenchScrewdriverIcon
+  },
+  {
+    name: 'Configuración 2FA',
+    description: 'Configurar autenticación de doble factor',
+    path: '/admin/2fa-settings',
+    icon: ShieldExclamationIcon
+  },
+  {
+    name: 'Reportes Mensuales',
+    description: 'Generar reportes de uso de materiales',
+    path: '/admin/monthly-reports',
+    icon: ChartBarIcon
   },
   {
     name: 'Configuración de Sanciones',

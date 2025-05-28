@@ -6,7 +6,9 @@ interface EquipmentListProps {
   onEdit?: (equipment: Equipment) => void;
   onDelete?: (id: number) => void;
   onReserve?: (equipment: Equipment) => void;
+  onReportDamage?: (equipment: Equipment) => void;
   showReserveButton?: boolean;
+  showAdminActions?: boolean;
 }
 
 export default function EquipmentList({ 
@@ -14,7 +16,9 @@ export default function EquipmentList({
   onEdit, 
   onDelete, 
   onReserve,
-  showReserveButton = false 
+  onReportDamage,
+  showReserveButton = false,
+  showAdminActions = false
 }: EquipmentListProps) {
   if (!equipments.length) {
     return (
@@ -33,7 +37,9 @@ export default function EquipmentList({
           onEdit={onEdit}
           onDelete={onDelete}
           onReserve={onReserve}
+          onReportDamage={onReportDamage}
           showReserveButton={showReserveButton}
+          showAdminActions={showAdminActions}
         />
       ))}
     </div>
