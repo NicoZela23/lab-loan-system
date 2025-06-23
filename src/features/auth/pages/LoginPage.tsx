@@ -53,13 +53,13 @@ export default function LoginPage() {
         role,
         name: role === 'teacher' ? 'Dr. José Martínez' : 'Estudiante',
         isAuthenticated: true
-      }));
-
-      // Redirigir según el rol
+      }));      // Redirigir según el rol
       if (role === 'teacher') {
         navigate('/teacher/pending-loans');
       } else if (role === 'student') {
-        navigate('/student/dashboard');
+        navigate('/student/materials');
+      } else if (role === 'admin') {
+        navigate('/admin');
       }
     } catch (err) {
       if (err instanceof Error) {
@@ -86,13 +86,17 @@ export default function LoginPage() {
       
       if (!validCodes.includes(twoFACode)) {
         throw new Error('Código de verificación inválido. Inténtalo de nuevo.');
-      }
-
-      // Si el código es válido, completar autenticación
+      }      // Si el código es válido, completar autenticación
       localStorage.setItem('labLoanUser', JSON.stringify(pendingAuthData));
       
-      // Redirigir al panel de administración
-      navigate('/admin');
+      // Redirigir según el rol
+      if (pendingAuthData.role === 'admin') {
+        navigate('/admin');
+      } else if (pendingAuthData.role === 'teacher') {
+        navigate('/teacher/pending-loans');
+      } else if (pendingAuthData.role === 'student') {
+        navigate('/student/materials');
+      }
       
     } catch (err) {
       if (err instanceof Error) {
@@ -335,9 +339,19 @@ export default function LoginPage() {
                 O prueba con las credenciales de demostración
               </span>
             </div>
-          </div>
-
-          <div className="mt-4 grid grid-cols-1 gap-3">
+          </div>          <div className="mt-4 grid grid-cols-1 gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                setEmail('estudiante@universidad.edu');
+                setPassword('estudiante123');
+                setRole('student');
+              }}
+              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+            >
+              Acceder como Estudiante (Demo)
+            </button>
+            
             <button
               type="button"
               onClick={() => {

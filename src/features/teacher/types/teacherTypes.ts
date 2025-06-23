@@ -5,7 +5,6 @@ export interface LoanRequest {
   studentName: string;
   studentId: string;
   equipment: string;
-  quantity: number;
   requestDate: string;
   pickupDate: string;
   returnDate: string;

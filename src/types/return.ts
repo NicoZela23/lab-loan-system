@@ -1,41 +1,35 @@
-import { Reservation } from './reservation';
-import { EquipmentCondition } from './equipment';
-
-export type ReturnCondition = 'bueno' | 'regular' | 'dañado';
-
-export type ProblemCategory = 
-  | 'desgaste_normal' 
-  | 'mal_funcionamiento' 
-  | 'daño_fisico' 
-  | 'faltante_componente' 
-  | 'mal_uso' 
-  | 'otro';
+export interface Return {
+  id: number;
+  loanRequestId: number;
+  equipmentId: number;
+  equipmentName: string;
+  studentId: string;
+  studentName: string;
+  studentEmail: string;
+  returnDate: string;
+  equipmentCondition: 'excellent' | 'good' | 'fair' | 'damaged';
+  studentComments?: string;
+  createdAt: Date;
+}
 
 export interface ReturnFormData {
-  reservationId: number;
-  condition: EquipmentCondition;
-  observations: string;
-  imageUrls: string[];
-  hasIssues: boolean;
-  issueType?: 'daño_leve' | 'daño_moderado' | 'daño_grave' | 'perdida' | 'otro';
-  issueDescription?: string;
-  requiresMaintenance?: boolean;
+  loanRequestId: number;
+  equipmentCondition: 'excellent' | 'good' | 'fair' | 'damaged';
+  studentComments?: string;
 }
 
-export interface EquipmentReturn {
-  id: number;
-  reservationId: number;
-  reservation?: Reservation;
-  returnDate: Date;
-  condition: ReturnCondition;
-  observations: string;
-  hasIssues: boolean;
-  teacherId: number; // ID del docente que recibe el equipo
-  teacherName: string; // Nombre del docente
-  createdAt: Date;
-  problemCategory?: ProblemCategory;
-  requiresMaintenance?: boolean;
-  restrictStudentAccess?: boolean;
-  imageUrls?: string[];
-  teacherNotes?: string;
-}
+// Estados de condición del equipo
+export const EQUIPMENT_CONDITION = {
+  excellent: 'Excelente',
+  good: 'Bueno',
+  fair: 'Regular',
+  damaged: 'Dañado'
+} as const;
+
+// Colores para los estados de condición
+export const EQUIPMENT_CONDITION_COLORS = {
+  excellent: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
+  good: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
+  fair: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300',
+  damaged: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
+} as const;

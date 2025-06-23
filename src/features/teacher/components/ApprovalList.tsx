@@ -107,10 +107,9 @@ export default function ApprovalList({ requests, onApprove, onReject }: Approval
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">{request.studentName}</div>
                       <div className="text-xs text-gray-500">{request.studentId}</div>
-                    </td>
-                    <td className="px-6 py-4">
+                    </td>                    <td className="px-6 py-4">
                       <div className="text-sm text-gray-900">{request.equipment}</div>
-                      <div className="text-xs text-gray-500">Cantidad: {request.quantity}</div>
+                      <div className="text-xs text-gray-500">Curso: {request.course}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-xs text-gray-500">Solicitud: {new Date(request.requestDate).toLocaleDateString()}</div>

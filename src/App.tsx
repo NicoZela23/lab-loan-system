@@ -1,6 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import EquipmentPage from './features/equipment/pages/EquipmentPage';
+import StudentEquipmentPage from './features/equipment/pages/StudentEquipmentPage';
+import StudentReservationsPage from './features/reservations/pages/StudentReservationsPage';
+import StudentLoansPage from './features/returns/pages/StudentLoansPage';
 import ReservationPage from './features/reservations/pages/ReservationPage';
 import IncidentPage from './features/incidents/pages/IncidentPage';
 import ReturnPage from './features/returns/pages/ReturnPage';
@@ -15,6 +18,7 @@ import PendingReservationsPage from './features/teacher/pages/PendingReservation
 import ActiveLoansPage from './features/teacher/pages/ActiveLoansPage';
 import ReturnRegistrationPage from './features/teacher/pages/ReturnRegistrationPage';
 import LoanInitialConditionPage from './features/teacher/components/LoanInitialConditionPage';
+import usePageTitle from './hooks/usePageTitle';
 import AdminDashboard from './features/admin/pages/AdminDashboard';
 import PenaltySettingsPage from './features/admin/pages/PenaltySettingsPage';
 import ActivePenaltiesPage from './features/admin/pages/ActivePenaltiesPage';
@@ -23,6 +27,9 @@ import TwoFactorSettingsPage from './features/admin/pages/TwoFactorSettingsPage'
 import './App.css';
 
 function App() {
+  // Hook para manejar títulos dinámicos de páginas
+  usePageTitle();
+
   return (
     <Routes>
       {/* Ruta pública: Login */}
@@ -30,8 +37,7 @@ function App() {
       
       {/* Ruta por defecto: redirige a login */}
       <Route path="/" element={<Navigate to="/login" replace />} />
-      
-      {/* Rutas protegidas generales dentro del Layout principal */}
+        {/* Rutas protegidas generales dentro del Layout principal */}
       <Route path="/" element={
         <ProtectedRoute>
           <Layout />
@@ -44,6 +50,17 @@ function App() {
         <Route path="aprobaciones" element={<ApprovalPage />} />
         <Route path="historial" element={<LoanHistoryPage />} />
         <Route path="usuarios" element={<UsersPage />} />
+      </Route>      {/* Rutas específicas para estudiantes */}
+      <Route path="/student" element={
+        <ProtectedRoute requiredRole="student">
+          <Layout />
+        </ProtectedRoute>
+      }>
+        <Route index element={<Navigate to="/student/materials" replace />} />
+        <Route path="materials" element={<StudentEquipmentPage />} />
+        <Route path="reservations" element={<StudentReservationsPage />} />
+        <Route path="loans" element={<StudentLoansPage />} />
+        <Route path="history" element={<LoanHistoryPage />} />
       </Route>
       
       {/* Rutas específicas para docentes */}
